@@ -1,4 +1,4 @@
-br/com/pedro/credito/CreditoApplicationTests.class
 br/com/pedro/credito/util/CreditoUtilTest.class
 br/com/pedro/credito/repositories/CreditoRepositoryTest.class
+br/com/pedro/credito/CreditoApplicationTests.class
 br/com/pedro/credito/services/CreditoServiceTest.class

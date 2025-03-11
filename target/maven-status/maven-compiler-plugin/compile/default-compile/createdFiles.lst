@@ -9,6 +9,7 @@ br/com/pedro/credito/exceptions/config/ExcpetionDetails$ExcpetionDetailsBuilder.
 br/com/pedro/credito/CreditoApplication.class
 br/com/pedro/credito/exceptions/config/ExcpetionDetails$ExcpetionDetailsBuilderImpl.class
 br/com/pedro/credito/repositories/CreditoRepository.class
+br/com/pedro/credito/exceptions/config/SecurityConfig.class
 br/com/pedro/credito/exceptions/config/ExcpetionDetails.class
 br/com/pedro/credito/exceptions/handlers/RestExceptionHandler.class
 br/com/pedro/credito/exceptions/BadRequestException.class
