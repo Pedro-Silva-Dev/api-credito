@@ -17,6 +17,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -98,5 +99,46 @@ class CreditoRepositoryTest {
         assertThat(results).isNotNull();
         assertThat(results).isEmpty();
     }
+
+    @Test
+    @DisplayName("Obter um credito por numero de credito.")
+    void findOneByNumeroCreditoTest() {
+        String numeroCredito = credito.getNumeroCredito();
+        Optional<Credito> result = creditoRepository.findOneByNumeroCredito(numeroCredito);
+        assertThat(result).isNotNull();
+        assertThat(result.isPresent()).isTrue();
+        assertThat(result.get()).isNotNull();
+        assertThat(result.get().getNumeroCredito()).isEqualTo(numeroCredito);
+    }
+
+    @Test
+    @DisplayName("Obter um credito vazia ao passar o numero de credito invalido.")
+    void findOneByNumeroCreditoInvalidoTest() {
+        Optional<Credito> result = creditoRepository.findOneByNumeroCredito(null);
+        assertThat(result).isNotNull();
+        assertThat(result.isPresent()).isFalse();
+        assertThat(result.isEmpty()).isTrue();
+    }
+
+    @Test
+    @DisplayName("Obter um credito vazia ao passar o numero de credito vazio.")
+    void findOneByNumeroCreditoVazioTest() {
+        Optional<Credito> result = creditoRepository.findOneByNumeroCredito("");
+        assertThat(result).isNotNull();
+        assertThat(result.isPresent()).isFalse();
+        assertThat(result.isEmpty()).isTrue();
+    }
+
+    @Test
+    @DisplayName("Obter um credito vazia ao passar o numero de credito incorreto.")
+    void findOneByNumeroCreditoIncorretoTest() {
+        String numeroCreditoIncorreto = String.format("A@$%sD#", credito.getNumeroCredito());
+        Optional<Credito> result = creditoRepository.findOneByNumeroCredito(numeroCreditoIncorreto);
+        assertThat(result).isNotNull();
+        assertThat(result.isPresent()).isFalse();
+        assertThat(result.isEmpty()).isTrue();
+    }
+
+
 
 }
