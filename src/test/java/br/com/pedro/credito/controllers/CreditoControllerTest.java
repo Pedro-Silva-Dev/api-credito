@@ -62,7 +62,7 @@ class CreditoControllerTest {
         credito = creditoRepository.save(novoCredito);
     }
 
-    @DisplayName("Criar um credito antes de cada teste.")
+    @DisplayName("Criar um crédito antes de cada teste.")
     @BeforeEach
     void cadastrarCreditoBefore() {
         this.cadastrarCredito();
@@ -76,7 +76,7 @@ class CreditoControllerTest {
 
 
     @Test
-    @DisplayName("Obter uma lista de creditos pelo numero nfse.")
+    @DisplayName("Obter uma lista de creditos pelo número nfse.")
     void obterCreditosPorNfseTest() {
         String numeroNfse = this.credito.getNumeroNfse();
         String url = String.format("/api/creditos/%s", numeroNfse);
@@ -89,10 +89,10 @@ class CreditoControllerTest {
     }
 
     @Test
-    @DisplayName("Obter uma lista de creditos pelo numero nfse nulo.")
+    @DisplayName("Obter uma lista de creditos pelo número nfse nulo.")
     void obterCreditosPorNfseNuloTest() {
-        String numeroNfse = null;
-        String url = String.format("/api/creditos/%s", numeroNfse);
+        String numeroNfseNulo = null;
+        String url = String.format("/api/creditos/%s", numeroNfseNulo);
         ResponseEntity<ExcpetionDetails> result = testRestTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<ExcpetionDetails>() {});
 
         assertThat(result.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
@@ -101,10 +101,10 @@ class CreditoControllerTest {
     }
 
     @Test
-    @DisplayName("Obter uma lista de creditos pelo numero nfse inválido.")
+    @DisplayName("Obter uma lista de creditos pelo número nfse inválido.")
     void obterCreditosPorNfseInvalidoTest() {
-        String numeroNfse = "null   ";
-        String url = String.format("/api/creditos/%s", numeroNfse);
+        String numeroNfseInvalido = "null   ";
+        String url = String.format("/api/creditos/%s", numeroNfseInvalido);
         ResponseEntity<ExcpetionDetails> result = testRestTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<ExcpetionDetails>() {});
 
         assertThat(result.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
@@ -113,15 +113,64 @@ class CreditoControllerTest {
     }
 
     @Test
-    @DisplayName("Obter uma lista de creditos pelo numero nfse incorreto.")
+    @DisplayName("Obter uma lista de creditos pelo número nfse incorreto.")
     void obterCreditosPorNfseIncorretoTest() {
-        String numeroNfse = String.format("$a%s#Z", this.credito.getNumeroNfse());
-        String url = String.format("/api/creditos/%s", numeroNfse);
+        String numeroNfseIncorreto = String.format("$a%s#Z", this.credito.getNumeroNfse());
+        String url = String.format("/api/creditos/%s", numeroNfseIncorreto);
         ResponseEntity<List<CreditoDto>> result = testRestTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<List<CreditoDto>>() {});
 
         assertThat(result.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(result.getBody()).isNotNull();
         assertThat(result.getBody()).isEmpty();
+    }
+
+    @Test
+    @DisplayName("Obter um credito pelo número de crédito.")
+    void obterCreditoPorNumeroCreditoTest() {
+        String numeroCredito = this.credito.getNumeroCredito();
+        String url = String.format("/api/creditos/credito/%s", numeroCredito);
+        ResponseEntity<CreditoDto> result = testRestTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<CreditoDto>() {});
+
+        assertThat(result.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(result.getBody()).isNotNull();
+        assertThat(result.getBody().getNumeroCredito()).isNotNull();
+        assertThat(result.getBody().getNumeroCredito()).isEqualTo(numeroCredito);
+    }
+
+    @Test
+    @DisplayName("Obter um credito pelo número de crédito nulo.")
+    void obterCreditoPorNumeroCreditoNuloTest() {
+        String numeroCreditoNulo = null;
+        String url = String.format("/api/creditos/credito/%s", numeroCreditoNulo);
+        ResponseEntity<ExcpetionDetails> result = testRestTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<ExcpetionDetails>() {});
+
+        assertThat(result.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+        assertThat(result.getBody()).isNotNull();
+        assertThat(result.getBody().getStatus()).isEqualTo(HttpStatus.NOT_FOUND.value());
+    }
+
+    @Test
+    @DisplayName("Obter um credito pelo número de crédito inválido.")
+    void obterCreditoPorNumeroCreditoInvalidoTest() {
+        String numeroCreditoInvalido = "null   ";
+        String url = String.format("/api/creditos/credito/%s", numeroCreditoInvalido);
+        ResponseEntity<ExcpetionDetails> result = testRestTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<ExcpetionDetails>() {});
+
+        assertThat(result.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+        assertThat(result.getBody()).isNotNull();
+        assertThat(result.getBody().getStatus()).isEqualTo(HttpStatus.NOT_FOUND.value());
+    }
+
+    @Test
+    @DisplayName("Obter um credito pelo número de crédito incorreto.")
+    void obterCreditoPorNumeroCreditoIncorretoTest() {
+        String numeroCreditoIncorreto = String.format("$a%s#Z", this.credito.getNumeroCredito());
+        String url = String.format("/api/creditos/credito/%s", numeroCreditoIncorreto);
+        ResponseEntity<ExcpetionDetails> result = testRestTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<ExcpetionDetails>() {});
+
+        assertThat(result.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+        assertThat(result.getBody()).isNotNull();
+        assertThat(result.getBody().getStatus()).isEqualTo(HttpStatus.NOT_FOUND.value());
     }
 
 }
