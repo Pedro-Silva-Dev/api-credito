@@ -1,1 +1,4 @@
 /home/pedro/Solipy/api-credito/src/test/java/br/com/pedro/credito/CreditoApplicationTests.java
+/home/pedro/Solipy/api-credito/src/test/java/br/com/pedro/credito/repositories/CreditoRepositoryTest.java
+/home/pedro/Solipy/api-credito/src/test/java/br/com/pedro/credito/services/CreditoServiceTest.java
+/home/pedro/Solipy/api-credito/src/test/java/br/com/pedro/credito/util/CreditoUtilTest.java

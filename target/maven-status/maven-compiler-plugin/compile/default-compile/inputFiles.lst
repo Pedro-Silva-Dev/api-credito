@@ -1,3 +1,4 @@
-/home/pedro/Solipy/api-credito/src/main/java/br/com/pedro/credito/CreditoApplication.java
 /home/pedro/Solipy/api-credito/src/main/java/br/com/pedro/credito/models/Credito.java
+/home/pedro/Solipy/api-credito/src/main/java/br/com/pedro/credito/CreditoApplication.java
+/home/pedro/Solipy/api-credito/src/main/java/br/com/pedro/credito/services/CreditoService.java
 /home/pedro/Solipy/api-credito/src/main/java/br/com/pedro/credito/repositories/CreditoRepository.java

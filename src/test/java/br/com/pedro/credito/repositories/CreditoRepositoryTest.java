@@ -1,6 +1,7 @@
 package br.com.pedro.credito.repositories;
 
 import br.com.pedro.credito.models.Credito;
+import br.com.pedro.credito.util.CreditoUtilTest;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -48,18 +49,7 @@ class CreditoRepositoryTest {
     }
 
     void cadastrarCredito() {
-        Credito novoCredito = Credito.builder()
-                .numeroCredito("123456")
-                .numeroNfse("7891011")
-                .dataConstituicao(LocalDate.now())
-                .valorIssqn(BigDecimal.valueOf(1500.75))
-                .tipoCredito("ISSQN")
-                .simplesNacional(true)
-                .aliquota(BigDecimal.valueOf(5.0))
-                .valorFaturado(BigDecimal.valueOf(30000.00))
-                .valorDeducao(BigDecimal.valueOf(5000.00))
-                .baseCalculo(BigDecimal.valueOf(25000.00))
-                .build();
+        Credito novoCredito = CreditoUtilTest.obterCreditoParaCadastro();
         credito = creditoRepository.save(novoCredito);
     }
 
