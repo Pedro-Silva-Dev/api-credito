@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -31,11 +32,12 @@ class CreditoServiceTest {
     void setup() {
         this.credito = CreditoUtilTest.obterCredito(1L);
         BDDMockito.when(creditoRepositoryMock.findAllByNumeroNfse(this.credito.getNumeroNfse())).thenReturn(List.of(this.credito));
+        BDDMockito.when(creditoRepositoryMock.findOneByNumeroCredito(this.credito.getNumeroCredito())).thenReturn(Optional.of(this.credito));
     }
 
     @Test
-    @DisplayName("Obter uma lista de credito por numero de nfse.")
-    void obterCreditoPorNumeroNfseTest() {
+    @DisplayName("Obter uma lista de crédito por número de nfse.")
+    void obterCreditosPorNumeroNfseTest() {
         String numeroNfse = this.credito.getNumeroNfse();
         List<Credito> results = creditoService.obterCreditosPorNumeroNfse(numeroNfse);
         assertThat(results).isNotEmpty();
@@ -45,26 +47,58 @@ class CreditoServiceTest {
     }
 
     @Test
-    @DisplayName("Obter uma lista de credito vazio ao passar o numero de nfse inválido.")
-    void obterCreditoPorNumeroNfseInvalidoTest() {
+    @DisplayName("Obter uma lista de crédito vazio ao passar o número de nfse inválido.")
+    void obterCreditosPorNumeroNfseInvalidoTest() {
         List<Credito> results = creditoService.obterCreditosPorNumeroNfse(null);
         assertThat(results).isNull();
     }
 
     @Test
-    @DisplayName("Obter uma lista de credito vazio ao passar o numero de nfse vazio.")
-    void obterCreditoPorNumeroNfseVazioTest() {
+    @DisplayName("Obter uma lista de crédito vazio ao passar o número de nfse vazio.")
+    void obterCreditosPorNumeroNfseVazioTest() {
         List<Credito> results = creditoService.obterCreditosPorNumeroNfse("");
         assertThat(results).isNull();
     }
 
     @Test
-    @DisplayName("Obter uma lista de credito vazio ao passar o numero de nfse incorreto.")
-    void obterCreditoPorNumeroNfseIncorretoTest() {
+    @DisplayName("Obter uma lista de crédito vazio ao passar o número de nfse incorreto.")
+    void obterCreditosPorNumeroNfseIncorretoTest() {
         String numeroNfseIncorreto = String.format("sA%s&Z", this.credito.getNumeroNfse());
         List<Credito> results = creditoService.obterCreditosPorNumeroNfse(numeroNfseIncorreto);
         assertThat(results).isNotNull();
         assertThat(results).isEmpty();
+    }
+
+    @Test
+    @DisplayName("Obter um crédito por número de crédito.")
+    void obterCreditoPorNumeroCreditoTest() {
+        String numeroCredito = this.credito.getNumeroCredito();
+        Credito result = creditoService.obterCreditoPorNumeroCredito(numeroCredito);
+        assertThat(result).isNotNull();
+        assertThat(result.getNumeroCredito()).isNotNull();
+        assertThat(result.getNumeroCredito()).isEqualTo(numeroCredito);
+    }
+
+    @Test
+    @DisplayName("Obter um crédito por número de crédito inválido.")
+    void obterCreditoPorNumeroCreditoInvalidoTest() {
+        Credito result = creditoService.obterCreditoPorNumeroCredito(null);
+        assertThat(result).isNull();
+    }
+
+    @Test
+    @DisplayName("Obter um crédito por número de crédito vazio.")
+    void obterCreditoPorNumeroCreditoVazioTest() {
+        Credito result = creditoService.obterCreditoPorNumeroCredito("");
+        assertThat(result).isNull();
+    }
+
+    @Test
+    @DisplayName("Obter um crédito por número de crédito incorreto.")
+    void obterCreditoPorNumeroNfseIncorretoTest() {
+        String numeroCreditoIncorreto = String.format("sA%s&Z", this.credito.getNumeroCredito());
+        Credito result = creditoService.obterCreditoPorNumeroCredito(numeroCreditoIncorreto);
+        assertThat(result).isNull();
     }
 
 }

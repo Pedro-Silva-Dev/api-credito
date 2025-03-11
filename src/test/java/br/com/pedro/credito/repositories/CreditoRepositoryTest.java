@@ -52,7 +52,7 @@ class CreditoRepositoryTest {
         credito = creditoRepository.save(novoCredito);
     }
 
-    @DisplayName("Criar um credito antes de cada teste.")
+    @DisplayName("Criar um crédito antes de cada teste.")
     @BeforeEach
     void cadastrarCreditoBefore() {
         this.cadastrarCredito();
@@ -65,7 +65,7 @@ class CreditoRepositoryTest {
     }
 
     @Test
-    @DisplayName("Obter uma lista de credito por numero de nfse.")
+    @DisplayName("Obter uma lista de crédito por número de nfse.")
     void findAllByNumeroNfseTest() {
         String numeroNfse = credito.getNumeroNfse();
         List<Credito> results = creditoRepository.findAllByNumeroNfse(numeroNfse);
@@ -76,7 +76,7 @@ class CreditoRepositoryTest {
     }
 
     @Test
-    @DisplayName("Obter lista de credito vazia ao passar o numero de nfse invalido.")
+    @DisplayName("Obter lista de crédito vazia ao passar o número de nfse inválido.")
     void findAllByNumeroNfseInvalidoTest() {
         List<Credito> results = creditoRepository.findAllByNumeroNfse(null);
         assertThat(results).isNotNull();
@@ -84,7 +84,7 @@ class CreditoRepositoryTest {
     }
 
     @Test
-    @DisplayName("Obter lista de credito vazia ao passar o numero de nfse vazio.")
+    @DisplayName("Obter lista de crédito vazia ao passar o número de nfse vazio.")
     void findAllByNumeroNfseVazioTest() {
         List<Credito> results = creditoRepository.findAllByNumeroNfse("");
         assertThat(results).isNotNull();
@@ -92,7 +92,7 @@ class CreditoRepositoryTest {
     }
 
     @Test
-    @DisplayName("Obter lista de credito vazia ao passar o numero de nfse incorreto.")
+    @DisplayName("Obter lista de crédito vazia ao passar o número de nfse incorreto.")
     void findAllByNumeroNfseIncorretoTest() {
         String numeroNfseIncorreto = String.format("A@$%sD#", credito.getNumeroNfse());
         List<Credito> results = creditoRepository.findAllByNumeroNfse(numeroNfseIncorreto);
@@ -101,7 +101,7 @@ class CreditoRepositoryTest {
     }
 
     @Test
-    @DisplayName("Obter um credito por numero de credito.")
+    @DisplayName("Obter um crédito por número de crédito.")
     void findOneByNumeroCreditoTest() {
         String numeroCredito = credito.getNumeroCredito();
         Optional<Credito> result = creditoRepository.findOneByNumeroCredito(numeroCredito);
@@ -112,7 +112,7 @@ class CreditoRepositoryTest {
     }
 
     @Test
-    @DisplayName("Obter um credito vazia ao passar o numero de credito invalido.")
+    @DisplayName("Obter um crédito vazia ao passar o número de crédito inválido.")
     void findOneByNumeroCreditoInvalidoTest() {
         Optional<Credito> result = creditoRepository.findOneByNumeroCredito(null);
         assertThat(result).isNotNull();
@@ -121,7 +121,7 @@ class CreditoRepositoryTest {
     }
 
     @Test
-    @DisplayName("Obter um credito vazia ao passar o numero de credito vazio.")
+    @DisplayName("Obter um crédito vazia ao passar o número de crédito vazio.")
     void findOneByNumeroCreditoVazioTest() {
         Optional<Credito> result = creditoRepository.findOneByNumeroCredito("");
         assertThat(result).isNotNull();
@@ -130,7 +130,7 @@ class CreditoRepositoryTest {
     }
 
     @Test
-    @DisplayName("Obter um credito vazia ao passar o numero de credito incorreto.")
+    @DisplayName("Obter um crédito vazia ao passar o número de crédito incorreto.")
     void findOneByNumeroCreditoIncorretoTest() {
         String numeroCreditoIncorreto = String.format("A@$%sD#", credito.getNumeroCredito());
         Optional<Credito> result = creditoRepository.findOneByNumeroCredito(numeroCreditoIncorreto);

@@ -24,5 +24,12 @@ public class CreditoService {
         return null;
     }
 
+    public Credito obterCreditoPorNumeroCredito(String numeroCredito) {
+        if(numeroCredito != null && !numeroCredito.trim().isEmpty() && !numeroCredito.trim().equals("null")) {
+            return creditoRepository.findOneByNumeroCredito(numeroCredito).orElse(null);
+        }
+        return null;
+    }
+
 
 }
