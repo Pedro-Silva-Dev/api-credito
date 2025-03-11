@@ -1,5 +1,6 @@
 br/com/pedro/credito/controllers/CreditoController.class
 br/com/pedro/credito/exceptions/RequestExceptionDetails$RequestExceptionDetailsBuilder.class
+br/com/pedro/credito/exceptions/NotFoundRequestException.class
 br/com/pedro/credito/models/Credito.class
 br/com/pedro/credito/models/mapper/CreditoMapperImpl.class
 br/com/pedro/credito/models/Credito$CreditoBuilder.class

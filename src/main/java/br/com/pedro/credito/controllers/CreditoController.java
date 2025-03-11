@@ -1,6 +1,7 @@
 package br.com.pedro.credito.controllers;
 
 import br.com.pedro.credito.exceptions.BadRequestException;
+import br.com.pedro.credito.exceptions.NotFoundRequestException;
 import br.com.pedro.credito.models.Credito;
 import br.com.pedro.credito.models.dto.CreditoDto;
 import br.com.pedro.credito.models.mapper.CreditoMapper;
@@ -30,6 +31,16 @@ public class CreditoController {
             return ResponseEntity.status(HttpStatus.OK.value()).body(creditoDtos);
         }
         throw new BadRequestException("Parametro incorreto, o numero nfse não pode ser nulo e não pode ser vázio.");
+    }
+
+    @GetMapping("/credito/{numeroCredito}")
+    public ResponseEntity<CreditoDto> obterCreditoPorNumeroCredito(@PathVariable String numeroCredito) {
+        Credito credito = creditoService.obterCreditoPorNumeroCredito(numeroCredito);
+        if(credito != null) {
+            CreditoDto creditoDto = CreditoMapper.INSTANCE.toCreditoDto(credito);
+            return ResponseEntity.status(HttpStatus.OK.value()).body(creditoDto);
+        }
+        throw new NotFoundRequestException("Não foi possível encontrar o crédito, verifique numero e tente novamente.");
     }
 
 }

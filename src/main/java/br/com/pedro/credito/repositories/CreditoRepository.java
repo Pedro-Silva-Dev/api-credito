@@ -13,6 +13,6 @@ public interface CreditoRepository extends JpaRepository<Credito, Long> {
 
     List<Credito> findAllByNumeroNfse(String numeroNfse);
 
-    @Query(value = "SELECT c.* FROM credito c WHERE c.numero_credito =?1", nativeQuery = true)
+    @Query(value = "SELECT c.* FROM credito c WHERE c.numero_credito =?1 LIMIT 1", nativeQuery = true)
     Optional<Credito> findOneByNumeroCredito(String numeroCredito);
 }
