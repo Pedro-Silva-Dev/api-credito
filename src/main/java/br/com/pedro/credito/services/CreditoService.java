@@ -18,7 +18,7 @@ public class CreditoService {
     private final CreditoRepository creditoRepository;
 
     public List<Credito> obterCreditoPorNumeroNfse(String numeroNfse) {
-        if(numeroNfse != null && !numeroNfse.isEmpty()) {
+        if(numeroNfse != null && !numeroNfse.trim().isEmpty() && !numeroNfse.trim().equals("null")) {
             return creditoRepository.findAllByNumeroNfse(numeroNfse);
         }
         return null;

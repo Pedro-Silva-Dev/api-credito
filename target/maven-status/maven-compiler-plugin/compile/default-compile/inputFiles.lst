@@ -1,4 +1,11 @@
+/home/pedro/Solipy/api-credito/src/main/java/br/com/pedro/credito/exceptions/handlers/RestExceptionHandler.java
+/home/pedro/Solipy/api-credito/src/main/java/br/com/pedro/credito/models/mapper/CreditoMapper.java
 /home/pedro/Solipy/api-credito/src/main/java/br/com/pedro/credito/models/Credito.java
 /home/pedro/Solipy/api-credito/src/main/java/br/com/pedro/credito/CreditoApplication.java
+/home/pedro/Solipy/api-credito/src/main/java/br/com/pedro/credito/exceptions/config/ExcpetionDetails.java
+/home/pedro/Solipy/api-credito/src/main/java/br/com/pedro/credito/models/dto/CreditoDto.java
 /home/pedro/Solipy/api-credito/src/main/java/br/com/pedro/credito/services/CreditoService.java
+/home/pedro/Solipy/api-credito/src/main/java/br/com/pedro/credito/controllers/CreditoController.java
+/home/pedro/Solipy/api-credito/src/main/java/br/com/pedro/credito/exceptions/BadRequestException.java
+/home/pedro/Solipy/api-credito/src/main/java/br/com/pedro/credito/exceptions/RequestExceptionDetails.java
 /home/pedro/Solipy/api-credito/src/main/java/br/com/pedro/credito/repositories/CreditoRepository.java
