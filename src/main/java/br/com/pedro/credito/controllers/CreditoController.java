@@ -24,7 +24,7 @@ public class CreditoController {
 
     @GetMapping("/{numeroNfse}")
     public ResponseEntity<List<CreditoDto>> obterCreditosPorNfse(@PathVariable String numeroNfse) {
-        List<Credito> creditos = creditoService.obterCreditoPorNumeroNfse(numeroNfse);
+        List<Credito> creditos = creditoService.obterCreditosPorNumeroNfse(numeroNfse);
         if(creditos != null) {
             List<CreditoDto> creditoDtos = creditos.stream().map(CreditoMapper.INSTANCE::toCreditoDto).toList();
             return ResponseEntity.status(HttpStatus.OK.value()).body(creditoDtos);

@@ -37,7 +37,7 @@ class CreditoServiceTest {
     @DisplayName("Obter uma lista de credito por numero de nfse.")
     void obterCreditoPorNumeroNfseTest() {
         String numeroNfse = this.credito.getNumeroNfse();
-        List<Credito> results = creditoService.obterCreditoPorNumeroNfse(numeroNfse);
+        List<Credito> results = creditoService.obterCreditosPorNumeroNfse(numeroNfse);
         assertThat(results).isNotEmpty();
         assertThat(results.get(0)).isNotNull();
         assertThat(results.get(0).getNumeroNfse()).isNotNull();
@@ -47,14 +47,14 @@ class CreditoServiceTest {
     @Test
     @DisplayName("Obter uma lista de credito vazio ao passar o numero de nfse inválido.")
     void obterCreditoPorNumeroNfseInvalidoTest() {
-        List<Credito> results = creditoService.obterCreditoPorNumeroNfse(null);
+        List<Credito> results = creditoService.obterCreditosPorNumeroNfse(null);
         assertThat(results).isNull();
     }
 
     @Test
     @DisplayName("Obter uma lista de credito vazio ao passar o numero de nfse vazio.")
     void obterCreditoPorNumeroNfseVazioTest() {
-        List<Credito> results = creditoService.obterCreditoPorNumeroNfse("");
+        List<Credito> results = creditoService.obterCreditosPorNumeroNfse("");
         assertThat(results).isNull();
     }
 
@@ -62,7 +62,7 @@ class CreditoServiceTest {
     @DisplayName("Obter uma lista de credito vazio ao passar o numero de nfse incorreto.")
     void obterCreditoPorNumeroNfseIncorretoTest() {
         String numeroNfseIncorreto = String.format("sA%s&Z", this.credito.getNumeroNfse());
-        List<Credito> results = creditoService.obterCreditoPorNumeroNfse(numeroNfseIncorreto);
+        List<Credito> results = creditoService.obterCreditosPorNumeroNfse(numeroNfseIncorreto);
         assertThat(results).isNotNull();
         assertThat(results).isEmpty();
     }

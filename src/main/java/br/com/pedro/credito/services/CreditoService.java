@@ -17,11 +17,12 @@ public class CreditoService {
 
     private final CreditoRepository creditoRepository;
 
-    public List<Credito> obterCreditoPorNumeroNfse(String numeroNfse) {
+    public List<Credito> obterCreditosPorNumeroNfse(String numeroNfse) {
         if(numeroNfse != null && !numeroNfse.trim().isEmpty() && !numeroNfse.trim().equals("null")) {
             return creditoRepository.findAllByNumeroNfse(numeroNfse);
         }
         return null;
     }
+
 
 }
