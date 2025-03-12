@@ -1,0 +1,39 @@
+services:
+
+  postgresql-db:
+    container_name: aries
+    image: postgres:17.4
+    restart: always
+    tty: true
+    environment:
+      POSTGRES_DATABASE: aries
+      POSTGRES_PASSWORD: aries_2025
+      POSTGRES_USER: aries
+    ports:
+      - 5433:5432
+    expose:
+      - 5433
+    networks:
+      - aries-net
+    volumes:
+      - ./db:/var/lib/postgres
+
+  app:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    expose:
+      - 8080
+    networks:
+      - aries-net
+    tty: true
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgresql-db:5432/aries
+    depends_on:
+      - postgresql-db
+
+networks:
+  aries-net:
+    driver: bridge
