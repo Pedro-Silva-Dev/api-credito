@@ -18,21 +18,21 @@ services:
     volumes:
       - ./db:/var/lib/postgres
 
-  app:
-    build:
-      context: ./
-      dockerfile: Dockerfile
-    ports:
-      - "8080:8080"
-    expose:
-      - 8080
-    networks:
-      - aries-net
-    tty: true
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgresql-db:5432/aries
-    depends_on:
-      - postgresql-db
+#  app:
+#    build:
+#      context: ./
+#      dockerfile: Dockerfile
+#    tty: true
+#    ports:
+#      - "8080:8080"
+#    expose:
+#      - 8080
+#    networks:
+#      - aries-net
+#    environment:
+#      SPRING_DATASOURCE_URL: jdbc:postgresql://postgresql-db:5432/aries
+#    depends_on:
+#      - postgresql-db
 
 networks:
   aries-net:

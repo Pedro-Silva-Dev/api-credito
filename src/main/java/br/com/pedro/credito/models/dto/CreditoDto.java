@@ -1,18 +1,13 @@
 package br.com.pedro.credito.models.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 @Builder
-@Getter @Service
 public class CreditoDto {
     private String numeroCredito;
     private String numeroNfse;
