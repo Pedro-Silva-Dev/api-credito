@@ -38,12 +38,6 @@ services:
       - 29092:29092
     networks:
       - aries-net
-    healthcheck:
-      test: ["CMD", "clear"]
-      interval: 10s
-      timeout: 10s
-      retries: 5
-      start_period: 60s
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
