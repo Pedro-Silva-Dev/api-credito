@@ -18,21 +18,58 @@ services:
     volumes:
       - ./db:/var/lib/postgres
 
-#  app:
-#    build:
-#      context: ./
-#      dockerfile: Dockerfile
-#    tty: true
-#    ports:
-#      - "8080:8080"
-#    expose:
-#      - 8080
-#    networks:
-#      - aries-net
-#    environment:
-#      SPRING_DATASOURCE_URL: jdbc:postgresql://postgresql-db:5432/aries
-#    depends_on:
-#      - postgresql-db
+  zookeeper:
+    container_name: zookeeper
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - 22181:2181
+    networks:
+      - aries-net
+
+  kafka:
+    container_name: kafka
+    image: confluentinc/cp-kafka:latest
+    depends_on:
+      - zookeeper
+    ports:
+      - 29092:29092
+    networks:
+      - aries-net
+    healthcheck:
+      test: ["CMD", "clear"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+  app:
+    container_name: spring-boot
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    tty: true
+    ports:
+      - "8080:8080"
+    expose:
+      - 8080
+    networks:
+      - aries-net
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgresql-db:5432/aries
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+    depends_on:
+      - postgresql-db
+      - kafka
 
 networks:
   aries-net:
