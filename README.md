@@ -16,6 +16,8 @@
 
 Com essa solução, é possível realizar buscas por **número da NFS-e** ou **número de crédito**, obtendo todos os detalhes do crédito consultado.
 
+Este projeto inclui a funcionalidade de log distribuído utilizando Apache Kafka.
+
 O objetivo deste projeto é demonstrar habilidades técnicas em **desenvolvimento back-end**, **boas práticas de código**, **testes automatizados** e **uso de tecnologias modernas**.
 </p>
 
@@ -36,6 +38,10 @@ Este projeto de API foi desenvolvido para proporcionar uma experiência eficient
 :heavy_check_mark: **Configuração de CORS**, permitindo comunicação segura entre diferentes origens.
 
 :heavy_check_mark: **Tratamento de erros** estruturado para uma API robusta e resiliente.
+
+:heavy_check_mark: **Producer**  Envia mensagens de log para um tópico Kafka.
+
+:heavy_check_mark: **Consumer** Escuta o tópico e processa as mensagens, exibindo no console.
 
 ## Acesso ao projeto
 1. Clone este repositório:
@@ -69,13 +75,19 @@ Este projeto de API foi desenvolvido para proporcionar uma experiência eficient
      http://localhost:8080/api/creditos/credito/123456
   ```
 
+6. Para visualizar os logs da API e visualizar os logs do consumer Kafka:
+```
+  docker logs -f spring-boot
+```
+
 ## Ferramentas utilizadas
 Este projeto foi desenvolvido utilizando tecnologias modernas e boas práticas para garantir **desempenho, segurança e escalabilidade**. As principais tecnologias empregadas são:  
 
 ### 🔹 Backend  
 - **Java 17** - Linguagem robusta e eficiente, garantindo alta performance e suporte a recursos modernos  
 - **Spring Boot 3.4.3** - Framework que simplifica o desenvolvimento de aplicações Java, proporcionando uma configuração ágil e produtiva  
-- **Spring Boot Security** - Implementação de segurança integrada para controle de autenticação e autorização  
+- **Spring Boot Security** - Implementação de segurança integrada para controle de autenticação e autorização
+- **Apache Kafka** - Uma plataforma de streaming que permite a comunicação assíncrona entre sistemas através do modelo de publicação e assinatura (Pub/Sub).
 
 ### 🗄️ Banco de Dados  
 - **PostgreSQL 17** - Banco de dados relacional escalável e confiável, garantindo consistência e integridade dos dados  
